@@ -9,5 +9,7 @@ RUN npm run build --configuration=production
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
 COPY --from=build /app/dist/angular-17-crud /usr/share/nginx/html
+# Copy custom nginx config file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
