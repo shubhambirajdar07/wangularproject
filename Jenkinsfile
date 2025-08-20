@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Deploy to Apache') {
       steps {
-        sh 'sudo cp -r dist/wangularproject/* /var/www/html/'
+        sh 'sudo cp -r dist/angular-17-crud/* /var/www/html/'
         sh 'sudo systemctl restart apache2'
       }
     }
