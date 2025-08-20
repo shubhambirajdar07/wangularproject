@@ -4,7 +4,7 @@ pipeline {
     stage('Install & Build') {
       steps {
         sh 'npm install'
-        sh 'ng build --prod'
+        sh 'ng build --configuration=production'
       }
     }
     stage('Deploy to Apache') {
