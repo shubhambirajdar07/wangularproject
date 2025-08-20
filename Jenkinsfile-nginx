@@ -8,13 +8,25 @@ pipeline {
     }
     stage('Build Docker Image') {
       steps {
-        sh 'docker build -t angular-app .'
+        script {
+          dockerImage = docker.build('angular-app:latest')
+        }
       }
     }
     stage('Run Docker Container') {
       steps {
-        sh 'docker rm -f angular-app || true'
-        sh 'docker run -d -p 8080:80 --name angular-app angular-app'
+        script {
+          sh 'docker rm -f angular-app || true'
+          sh 'docker run -d -p 8080:80 --name angular-app angular-app:latest'
+        }
+      }
+    }
+    stage('Show Access URL') {
+      steps {
+        script {
+          def serverIP = sh(script: "curl -s http://checkip.amazonaws.com", returnStdout: true).trim()
+          echo "Application deployed at: http://${serverIP}:8080"
+        }
       }
     }
   }
