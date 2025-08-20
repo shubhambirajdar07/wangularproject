@@ -15,6 +15,7 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Copy Angular build output
 COPY --from=build /app/dist/angular-17-crud /usr/share/nginx/html
+RUN chown -R nginx:nginx /usr/share/nginx/html
 RUN chmod -R 755 /usr/share/nginx/html
 
 
