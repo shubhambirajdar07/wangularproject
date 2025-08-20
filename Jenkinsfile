@@ -1,16 +1,26 @@
 pipeline {
   agent any
   stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
     stage('Install & Build') {
       steps {
-        sh 'npm install'
-        sh 'ng build --configuration=production'
+        sh '''
+          npm install
+          npx ng build --configuration production
+        '''
       }
     }
     stage('Deploy to Apache') {
       steps {
-        sh 'sudo cp -r dist/angular-17-crud/* /var/www/html/'
-        sh 'sudo systemctl restart apache2'
+        sh '''
+          sudo rm -rf /var/www/html/*
+          sudo cp -r dist/angular-17-crud/* /var/www/html/
+          sudo systemctl restart apache2 || sudo systemctl restart httpd
+        '''
       }
     }
   }
