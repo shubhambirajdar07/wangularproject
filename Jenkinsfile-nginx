@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('Clone Repo') {
       steps {
-        // Use SSH credentials if needed, or HTTPS if public repo
-        git url: 'https://github.com/shubhambirajdar07/wangularproject.git'
+        git branch: 'main', url: 'https://github.com/shubhambirajdar07/wangularproject.git'
       }
     }
     stage('Build Docker Image') {
@@ -14,7 +13,6 @@ pipeline {
     }
     stage('Run Docker Container') {
       steps {
-        // Remove existing container if exists
         sh 'docker rm -f angular-app || true'
         sh 'docker run -d -p 8080:80 --name angular-app angular-app'
       }
