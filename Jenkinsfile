@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Clone Repo') {
-      steps {
-        git 'https://github.com/shubhambirajdar07/wangularproject.git'
-      }
-    }
     stage('Install & Build') {
       steps {
         sh 'npm install'
