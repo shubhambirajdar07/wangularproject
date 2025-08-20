@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('Clone Repo') {
       steps {
-        git 'git@github.com:shubhambirajdar07/wangularproject.git'
-		credentialsId: '37ebe839-8d51-4313-bfd8-a3ba8c9f97b0'
+        git 'https://github.com/shubhambirajdar07/wangularproject.git'
       }
     }
     stage('Install & Build') {
