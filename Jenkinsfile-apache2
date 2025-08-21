@@ -10,7 +10,7 @@ pipeline {
       steps {
         sh '''
           npm install
-          npx ng build --configuration production
+          ./node_modules/.bin/ng build --configuration production
         '''
       }
     }
